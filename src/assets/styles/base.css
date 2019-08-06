@@ -56,7 +56,7 @@ body, html {
 	margin-bottom: 22px;
 }
 
-.el-input_inner {
+.el-input-inner {
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
@@ -67,7 +67,7 @@ body, html {
 	padding: 0 10px;
 }
 
-.el-input_inner:focus {
+.el-input-inner:focus {
 	border-color: rgb(53, 147, 255);
 }
 

@@ -7,33 +7,33 @@
 			</div>
 			<div class="form">
 				<div class="el-input">
-					<input id="user" type="text" placeholder="用户名" class="el-input_inner">
+					<input id="user" type="text" placeholder="用户名" class="el-input-inner">
 					<span class="error"></span>
 				</div>
 				<div class="el-input">
-					<input id="name" type="text" placeholder="昵称" class="el-input_inner">
+					<input id="name" type="text" placeholder="昵称" class="el-input-inner">
 					<span class="error"></span>
 				</div>
 				<div class="el-input">
-					<input id="num" type="text" placeholder="用户编号" class="el-input_inner">
+					<input id="num" type="text" placeholder="用户编号" class="el-input-inner">
 					<span class="error"></span>
 				</div>
 				<div class="el-input">
-					<input id="password" type="password" placeholder="密码" class="el-input_inner">
+					<input id="password" type="password" placeholder="密码" class="el-input-inner">
 					<span class="error"></span>
 				</div>
 				<div class="el-input">
-					<input id="repeatPassword" type="password" placeholder="确认密码" class="el-input_inner">
+					<input id="repeatPassword" type="password" placeholder="确认密码" class="el-input-inner">
 					<span class="error"></span>
 				</div>
 				<div class="el-input">
-					<input id="email" type="text" placeholder="邮件" class="el-input_inner">
+					<input id="email" type="text" placeholder="邮件" class="el-input-inner">
 					<span class="error"></span>
 				</div>
 			</div>
 			<div class="el-form">
 				<div class="el-form-item">
-					<button id="el-reset" class="el-button el-input_inner">重置密码</button>
+					<button id="el-reset" class="el-button el-input-inner">重置密码</button>
 				</div>
 			</div>
 			<div class="el-form">
@@ -52,5 +52,5 @@ export default {
 </script>
 
 <style scoped>
-
+@import "../../assets/styles/base.css";
 </style>

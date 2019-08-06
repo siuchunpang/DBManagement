@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/pages/login/Login'
 import Register from '@/pages/register/Register'
 import Reset from '@/pages/reset/Reset'
+import Index from '@/pages/index/Index'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/reset',
       name: 'Reset',
       component: Reset
+    },
+    {
+      path: '/index',
+      name: 'Index',
+      component: Index
     }
   ]
 })
