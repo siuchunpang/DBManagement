@@ -13,10 +13,11 @@
             :placeholder="item.placeholder"
             class="el-input-inner"
             :style="{'border-color': item.borderColor}"
-            @blur="handleBlur(item.inputValue)"
+            @blur="handleBlur(item)"
+            @focus="handleFocus(item)"
             v-model="item.inputValue"
           />
-          <span class="error" v-show="item.showError">用户名不能为空</span>
+          <span class="error" v-show="item.showError">{{ item.errorMsg }}</span>
         </div>
       </div>
       <div class="el-form">
@@ -65,14 +66,18 @@ export default {
     }
   },
   methods: {
-    handleBlur(val) {
-      if(!val) {
-        this.showError = true
-        this.borderColor = '#ff4040'
+    handleBlur(item) {
+      if (item.inputValue) {
+        item.showError = false
+        item.borderColor = '#bbb'
       } else {
-        this.showError = false
-        this.borderColor = '#bbb'
+        item.showError = true
+        item.borderColor = '#ff4040'
       }
+    },
+    handleFocus(item) {
+      item.showError = false
+      item.borderColor = '#bbb'
     },
     handleLoginClick() {
       axois.post(url, {
