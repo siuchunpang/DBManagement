@@ -11,8 +11,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://7iut8n.natappfree.cc'
+      '^/api': {
+        target: ' http://cr3fd9.natappfree.cc'
       }
     },
 

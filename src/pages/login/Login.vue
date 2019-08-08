@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import axois from 'axois'
+import axios from 'axios'
+import Qs from 'qs'
 export default {
   name: "Login",
   data() {
@@ -80,11 +81,15 @@ export default {
       item.borderColor = '#bbb'
     },
     handleLoginClick() {
-      axois.post(url, {
-        params: {
-          
-        }
-      })
+      let params = {}
+      for (let i = 0; i < this.arr.length; i++) {
+        params[this.arr[i].id] = this.arr[i].inputValue;
+      }
+      console.log(params)
+      axios.post('http://cr3fd9.natappfree.cc/login', Qs.stringify(params)).then(this.handlePostDataSucc)
+    },
+    handlePostDataSucc(res) {
+      this.$layer.msg(res.data.msg);
     }
   }
 }
