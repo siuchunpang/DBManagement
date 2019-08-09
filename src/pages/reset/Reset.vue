@@ -5,35 +5,29 @@
 				<div>数据库管理系统</div>
 				<div class="middle-subtitle">重置密码</div>
 			</div>
-			<div class="form">
+			<div class="form" v-for="(item, i) in arr" :key="i">
 				<div class="el-input">
-					<input id="user" type="text" placeholder="用户名" class="el-input-inner">
-					<span class="error"></span>
-				</div>
-				<div class="el-input">
-					<input id="name" type="text" placeholder="昵称" class="el-input-inner">
-					<span class="error"></span>
-				</div>
-				<div class="el-input">
-					<input id="num" type="text" placeholder="用户编号" class="el-input-inner">
-					<span class="error"></span>
-				</div>
-				<div class="el-input">
-					<input id="password" type="password" placeholder="密码" class="el-input-inner">
-					<span class="error"></span>
-				</div>
-				<div class="el-input">
-					<input id="repeatPassword" type="password" placeholder="确认密码" class="el-input-inner">
-					<span class="error"></span>
-				</div>
-				<div class="el-input">
-					<input id="email" type="text" placeholder="邮件" class="el-input-inner">
-					<span class="error"></span>
+					<input
+						:id="item.id"
+            :type="item.type"
+            :placeholder="item.placeholder"
+            class="el-input-inner"
+            :style="{'border-color': item.borderColor}"
+            @blur="handleBlur(item)"
+            @focus="handleFocus(item)"
+            v-model="item.inputValue"
+					>
+					<span class="error" v-show="item.showError">{{ item.errorMsg }}</span>
 				</div>
 			</div>
 			<div class="el-form">
 				<div class="el-form-item">
-					<button id="el-reset" class="el-button el-input-inner">重置密码</button>
+					<button
+						id="el-register"
+						class="el-button el-input-inner"
+						@click="handleResetClick"
+					>
+					重置密码</button>
 				</div>
 			</div>
 			<div class="el-form">
@@ -46,8 +40,92 @@
 </template>
 
 <script>
+import axios from 'axios'
+import Qs from 'qs'
 export default {
-  name: "Login"
+	name: "Reset",
+	data() {
+    return {
+      arr: [{
+        id: 'user',
+        type: 'text',
+        placeholder: '用户名',
+        inputValue: '',
+        borderColor: '#bbb',
+        showError: false,
+        errorMsg: '用户名不能为空',
+      },{
+        id: 'name',
+        type: 'text',
+        placeholder: '昵称',
+        inputValue: '',
+        borderColor: '#bbb',
+        showError: false,
+        errorMsg: '昵称不能为空',
+      },{
+        id: 'num',
+        type: 'text',
+        placeholder: '用户编号',
+        inputValue: '',
+        borderColor: '#bbb',
+        showError: false,
+        errorMsg: '用户编号不能为空',
+      },{
+        id: 'password',
+        type: 'password',
+        placeholder: '密码',
+        inputValue: '',
+        borderColor: '#bbb',
+        showError: false,
+        errorMsg: '请输入密码',
+      },{
+        id: 'repeatPassword',
+        type: 'password',
+        placeholder: '确认密码',
+        inputValue: '',
+        borderColor: '#bbb',
+        showError: false,
+        errorMsg: '请再次输入密码',
+      },{
+        id: 'email',
+        type: 'text',
+        placeholder: '邮件',
+        inputValue: '',
+        borderColor: '#bbb',
+        showError: false,
+        errorMsg: '邮箱不能为空',
+      }]
+    }
+	},
+	methods: {
+    handleBlur(item) {
+      if (item.inputValue) {
+        item.showError = false
+        item.borderColor = '#bbb'
+      } else {
+        item.showError = true
+        item.borderColor = '#ff4040'
+      }
+    },
+    handleFocus(item) {
+      item.showError = false
+      item.borderColor = '#bbb'
+    },
+    handleResetClick() {
+      let params = {}
+      for (let i = 0; i < this.arr.length; i++) {
+				params[this.arr[i].id] = this.arr[i].inputValue;
+				if (!this.arr[i].inputValue) {
+					this.$layer.msg(this.arr[i].errorMsg)
+					return
+				}
+      }
+      axios.post('http://cr3fd9.natappfree.cc/resetPassword', Qs.stringify(params)).then(this.handlePostDataSucc)
+    },
+    handlePostDataSucc(res) {
+      this.$layer.msg(res.data.msg)
+    }
+  }
 }
 </script>
 

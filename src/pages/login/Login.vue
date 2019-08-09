@@ -83,13 +83,16 @@ export default {
     handleLoginClick() {
       let params = {}
       for (let i = 0; i < this.arr.length; i++) {
-        params[this.arr[i].id] = this.arr[i].inputValue;
+        params[this.arr[i].id] = this.arr[i].inputValue
+        if (!this.arr[i].inputValue) {
+					this.$layer.msg(this.arr[i].errorMsg)
+					return
+				}
       }
-      console.log(params)
       axios.post('http://cr3fd9.natappfree.cc/login', Qs.stringify(params)).then(this.handlePostDataSucc)
     },
     handlePostDataSucc(res) {
-      this.$layer.msg(res.data.msg);
+      this.$layer.msg(res.data.msg)
     }
   }
 }
