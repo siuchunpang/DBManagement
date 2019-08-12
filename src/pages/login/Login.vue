@@ -21,14 +21,9 @@
         </div>
       </div>
       <div class="el-form">
-          <div class="el-form-item">
-            <button
-              id="el-login"
-              class="el-button el-input-inner"
-              @click="handleLoginClick"
-            >
-            登录</button>
-          </div>
+        <div class="el-form-item">
+          <button id="el-login" class="el-button el-input-inner" @click="handleLoginClick">登录</button>
+        </div>
       </div>
       <div class="el-form el-show">
         <div class="el-form-span">
@@ -41,61 +36,69 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Qs from 'qs'
+import axios from "axios";
+import Qs from "qs";
 export default {
   name: "Login",
   data() {
     return {
-      arr: [{
-        id: 'user',
-        type: 'text',
-        placeholder: '用户名',
-        inputValue: '',
-        borderColor: '#bbb',
-        showError: false,
-        errorMsg: '用户名不能为空',
-      },{
-        id: 'password',
-        type: 'password',
-        placeholder: '密码',
-        inputValue: '',
-        borderColor: '#bbb',
-        showError: false,
-        errorMsg: '请输入密码',
-      }]
-    }
+      arr: [
+        {
+          id: "user",
+          type: "text",
+          placeholder: "用户名",
+          inputValue: "",
+          borderColor: "#bbb",
+          showError: false,
+          errorMsg: "用户名不能为空"
+        },
+        {
+          id: "password",
+          type: "password",
+          placeholder: "密码",
+          inputValue: "",
+          borderColor: "#bbb",
+          showError: false,
+          errorMsg: "请输入密码"
+        }
+      ]
+    };
   },
   methods: {
     handleBlur(item) {
       if (item.inputValue) {
-        item.showError = false
-        item.borderColor = '#bbb'
+        item.showError = false;
+        item.borderColor = "#bbb";
       } else {
-        item.showError = true
-        item.borderColor = '#ff4040'
+        item.showError = true;
+        item.borderColor = "#ff4040";
       }
     },
     handleFocus(item) {
-      item.showError = false
-      item.borderColor = '#bbb'
+      item.showError = false;
+      item.borderColor = "#bbb";
     },
     handleLoginClick() {
-      let params = {}
+      let params = {};
       for (let i = 0; i < this.arr.length; i++) {
-        params[this.arr[i].id] = this.arr[i].inputValue
+        params[this.arr[i].id] = this.arr[i].inputValue;
         if (!this.arr[i].inputValue) {
-					this.$layer.msg(this.arr[i].errorMsg)
-					return
-				}
+          this.$layer.msg(this.arr[i].errorMsg);
+          return;
+        }
       }
-      axios.post('http://cr3fd9.natappfree.cc/login', Qs.stringify(params)).then(this.handlePostDataSucc)
+      axios
+        .post("http://cr3fd9.natappfree.cc/login", Qs.stringify(params))
+        .then(this.handlePostDataSucc);
     },
     handlePostDataSucc(res) {
-      this.$layer.msg(res.data.msg)
-    }
+      this.$layer.msg(res.data.msg);
+      setTimeout(() => {
+        this.$router.push("/index");
+      }, 2000);
+    },
   }
-}
+};
 </script>
 
 <style scoped>
