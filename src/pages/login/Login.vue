@@ -92,11 +92,20 @@ export default {
         .then(this.handlePostDataSucc);
     },
     handlePostDataSucc(res) {
-      this.$layer.msg(res.data.msg);
-      setTimeout(() => {
-        this.$router.push("/index");
-      }, 2000);
-    },
+      res = res.data;
+      console.log(res);
+      localStorage.login = 1;
+      if (res.code === 0) {
+        localStorage.userId = res.data.id;
+        localStorage.user = res.data.user;
+        this.$layer.msg(res.msg);
+        setTimeout(() => {
+          this.$router.push("/index");
+        }, 2000);
+      } else {
+        this.$layer.msg(res.msg);
+      }
+    }
   }
 };
 </script>
