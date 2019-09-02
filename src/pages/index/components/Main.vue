@@ -10,10 +10,15 @@
         </div>
       </div>
       <div class="main-list">
-        <router-link to="/detail" class="list" tag="div" v-for="(item, i) of appLists" :key="i">
+        <div
+          class="list"
+          v-for="(item, i) of appLists"
+          :key="i"
+          @click="handleListClick(item)"
+        >
           <img class="list-img" src="~styles/icon/people.png" />
           <h4 class="list-name">{{ item.name }}</h4>
-        </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -44,6 +49,9 @@ export default {
       if (localStorage.login == 0) {
         this.$router.push("/");
       }
+    },
+    handleListClick(item) {
+      this.$router.push("/detail/" + item.id);
     }
   },
   mounted() {
@@ -120,7 +128,7 @@ export default {
   }
 
   .list:hover {
-    color: blue;
+    color: #3593ff;
     box-shadow: 2px 2px 10px #646464;
     cursor: pointer;
   }

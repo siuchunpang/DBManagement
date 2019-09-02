@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="index-base">
     <div class="index">
       <index-nav class="nav"></index-nav>
       <index-main class="main" @showModal="handleMainShowModal" :appLists="appLists"></index-main>
@@ -38,14 +38,12 @@ export default {
     getAppList() {
       let params = { userId: localStorage.userId };
       axios
-        .post(
-          "http://cr3fd9.natappfree.cc/application/getApplications",
-          Qs.stringify(params)
-        )
+        .post("/api/application/getApplications", Qs.stringify(params))
         .then(this.handlePostDataSucc);
     },
     handlePostDataSucc(res) {
       res = res.data;
+      console.log(res);
       if (res.code === 0) {
         this.appLists = res.data;
       } else {
@@ -60,49 +58,53 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.index {
+.index-base {
   height: 100%;
-  overflow: hidden;
 
-  .nav {
+  .index {
     height: 100%;
-    width: 60px;
-    background: #272b31;
-    display: inline-block;
-    vertical-align: top;
+    overflow: hidden;
+
+    .nav {
+      height: 100%;
+      width: 60px;
+      background: #272b31;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .main {
+      width: calc(100% - 180px);
+      font-size: 16px;
+      vertical-align: top;
+      padding: 2%;
+      display: inline-block;
+    }
   }
 
-  .main {
-    width: calc(100% - 180px);
-    font-size: 16px;
-    vertical-align: top;
-    padding: 2%;
-    display: inline-block;
+  .modal {
+    width: 500px;
+    position: fixed;
+    top: 25%;
+    left: 30%;
+    opacity: 1;
+    z-index: 11;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    // display: none;
   }
-}
 
-.modal {
-  width: 500px;
-  position: fixed;
-  top: 25%;
-  left: 30%;
-  opacity: 1;
-  z-index: 11;
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 6px;
-  // display: none;
-}
-
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-  background-color: #000;
-  opacity: 0.5;
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #000;
+    opacity: 0.5;
+  }
 }
 </style>
 

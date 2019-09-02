@@ -88,7 +88,7 @@ export default {
         }
       }
       axios
-        .post("http://cr3fd9.natappfree.cc/login", Qs.stringify(params))
+        .post("/api/login", Qs.stringify(params))
         .then(this.handlePostDataSucc);
     },
     handlePostDataSucc(res) {

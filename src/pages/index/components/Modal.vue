@@ -69,7 +69,7 @@ export default {
       };
       axios
         .post(
-          "http://cr3fd9.natappfree.cc/application/insert",
+          "/api/application/insert",
           Qs.stringify(params)
         )
         .then(this.handlePostDataSucc);
@@ -79,7 +79,7 @@ export default {
       if (res.code === 0) {
         this.$layer.msg(res.msg);
         setTimeout(() => {
-          this.$router.go(0);
+          this.$router.go(0); //当页刷新
         }, 2000);
       } else {
         this.$layer.msg(res.msg);

@@ -35,3 +35,11 @@ body, html {
 	height: 100%;
 	background-color: #f6f6f6;
 }
+
+ul,ol {
+	list-style:none
+}
+
+#app {
+	height: 100%;
+}

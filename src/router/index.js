@@ -4,6 +4,7 @@ import Login from '@/pages/login/Login'
 import Register from '@/pages/register/Register'
 import Reset from '@/pages/reset/Reset'
 import Index from '@/pages/index/Index'
+import Detail from '@/pages/detail/Detail'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/index',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/detail/:id',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })
