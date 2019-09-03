@@ -11,7 +11,7 @@
       <div class="sidebar-list">
         <div class="sidebar-title">
           <b>数据库</b>
-          <button type="button" class="add-table">添加表</button>
+          <button type="button" class="add-table" @click="createTable">添加表</button>
         </div>
         <div class="sidebar-search">
           <div class="search">
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       selected: this.$route.params.id,
+      showModal: false,
       tableLists: []
     };
   },
@@ -46,6 +47,10 @@ export default {
     appLists: Array
   },
   methods: {
+    createTable() {
+      this.showModal = true;
+      this.$emit("showModal", this.showModal);
+    },
     changeOption(selected) {
       this.$router.push("/detail/" + selected);
     },
@@ -123,6 +128,7 @@ input::-webkit-input-placeholder {
         padding: 0 10px;
 
         .add-table {
+          cursor: pointer;
           margin-left: 67px;
           border-color: transparent;
           color: #3593ff;

@@ -12,7 +12,7 @@
             <input
               id="name"
               type="text"
-              class="formControl"
+              class="form-control"
               :style="{'border-color': borderColor}"
               placeholder="必填"
               v-model="inputValue"
@@ -128,7 +128,7 @@ export default {
       font-family: '微软雅黑';
     }
 
-    .formControl {
+    .form-control {
       height: 34px;
       width: 380px;
       padding: 5px;
