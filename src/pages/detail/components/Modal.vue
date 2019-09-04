@@ -4,27 +4,29 @@
       <div class="model-content">
         <div class="model-header">
           <h4 class="model-title">创建表</h4>
-          <button class="btn-close" @click="handleClose">×</button>
+          <button class="header-btn-close" @click="handleClose">×</button>
         </div>
         <div class="model-body">
           <div class="form-group" v-for="(item, i) in arr" :key="i">
             <label class="model-name">{{ item.name }}</label>
-            <input
-              :id="item.id"
-              :type="item.type"
-              class="form-control"
-              :style="{'border-color': borderColor}"
-              placeholder="必填"
-              @blur="handleBlur(item)"
-              @focus="handleFocus(item)"
-              v-model="item.inputValue"
-            />
-            <span class="error" v-show="showError">表名称不能为空！</span>
+            <div class="form-input">
+              <input
+                :id="item.id"
+                :type="item.type"
+                class="form-control"
+                :style="{'border-color': item.borderColor}"
+                placeholder="必填"
+                @blur="handleBlur(item)"
+                @focus="handleFocus(item)"
+                v-model="item.inputValue"
+              />
+              <span :class="item.errorCls" v-show="item.showError">{{ item.errorMsg }}</span>
+            </div>
           </div>
         </div>
         <div class="model-footer">
           <button class="button btn-close" type="button" @click="handleClose">关闭</button>
-          <button id="btn" class="submit" type="submit" @click="handleCreateApp">创建应用</button>
+          <button id="btn" class="submit" type="submit" @click="handleCreateTable">创建表</button>
         </div>
       </div>
     </div>
@@ -39,8 +41,8 @@ export default {
   data() {
     return {
       showModal: true,
-      showError: false,
-      borderColor: "#bbb",
+      tableName: "",
+      tableRemark: "",
       arr: [
         {
           id: "name",
@@ -49,7 +51,8 @@ export default {
           inputValue: "",
           borderColor: "#bbb",
           showError: false,
-          errorMsg: "表名不能为空"
+          errorMsg: "表名不能为空",
+          errorCls: "error-table"
         },
         {
           id: "table-remark",
@@ -58,7 +61,8 @@ export default {
           inputValue: "",
           borderColor: "#bbb",
           showError: false,
-          errorMsg: "表注释不能为空！"
+          errorMsg: "表注释不能为空！",
+          errorCls: "error-table-remark"
         }
       ]
     };
@@ -81,25 +85,23 @@ export default {
       this.showModal = false;
       this.$emit("showModal", this.showModal);
     },
-    handleCreateApp() {
+    handleCreateTable() {
       let params = {
-        name: this.inputValue,
-        userId: localStorage.userId
+        name: this.arr[0].inputValue,
+        remark: this.arr[1].inputValue,
+        applicationId: this.$route.params.id
       };
-      axios
-        .post("/api/application/insert", Qs.stringify(params))
-        .then(this.handlePostDataSucc);
-    },
-    handlePostDataSucc(res) {
-      res = res.data;
-      if (res.code === 0) {
-        this.$layer.msg(res.msg);
-        setTimeout(() => {
-          this.$router.go(0); //当页刷新
-        }, 2000);
-      } else {
-        this.$layer.msg(res.msg);
-      }
+      axios.post("/api/table/insert", Qs.stringify(params)).then(res => {
+        res = res.data;
+        if (res.code === 0) {
+          this.$layer.msg(res.msg);
+          setTimeout(() => {
+            this.$router.go(0); //当页刷新
+          }, 2000);
+        } else {
+          this.$layer.msg(res.msg);
+        }
+      });
     }
   }
 };
@@ -135,15 +137,14 @@ export default {
       min-height: 16.43px;
       border-bottom: 1px solid #e5e5e5;
 
-      .model-name {
-        padding: 15px;
-        min-height: 16.43px;
-        border-bottom: 1px solid #e5e5e5;
+      .model-title {
+        display: inline-block;
         font-size: 14px;
         font-family: '微软雅黑';
+        font-weight: 700;
       }
 
-      .btn-close {
+      .header-btn-close {
         float: right;
         font-size: 21px;
         font-weight: 700;
@@ -165,6 +166,71 @@ export default {
 
     .form-group {
       margin: 15px 0;
+
+      .model-name {
+        font-size: 14px;
+        font-family: '微软雅黑';
+      }
+
+      .form-input {
+        vertical-align: middle;
+        margin-left: 10px;
+        display: inline-block;
+
+        .form-control {
+          width: 390px;
+        }
+
+        .error-table {
+          margin-left: 79px;
+          position: absolute;
+          top: 52px;
+          left: 12px;
+          font-size: 12px;
+          color: #ff4040;
+        }
+
+        .error-table-remark {
+          margin-left: 79px;
+          position: absolute;
+          top: 101px;
+          left: 12px;
+          font-size: 12px;
+          color: #ff4040;
+        }
+      }
+    }
+  }
+
+  .model-footer {
+    padding: 10px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+
+    .button {
+      border-radius: 2px;
+      font-size: 12px;
+      color: #333;
+      background: #fff;
+      border: 1px solid transparent;
+      border-color: #ccc;
+      margin-right: 10px;
+      text-align: center;
+      cursor: pointer;
+      padding: 5px 20px;
+    }
+
+    .submit {
+      border-radius: 2px;
+      font-size: 12px;
+      color: #fff;
+      background: #3593ff;
+      border: 1px solid transparent;
+      border-color: #ccc;
+      margin-right: 5px;
+      text-align: center;
+      cursor: pointer;
+      padding: 5px 20px;
     }
   }
 }

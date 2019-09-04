@@ -37,7 +37,6 @@ export default {
     .back-img {
       width: 26px;
       margin-top: 3px;
-      margin-bottom: 3px;
       padding: 10px 0;
     }
   }
@@ -56,13 +55,12 @@ export default {
       .menu-list-img {
         width: 26px;
         margin-top: 3px;
-        margin-bottom: 3px;
       }
 
       .menu-list-name {
         color: #fff;
         font-size: 13px;
-        margin-bottom: 0;
+        margin-bottom: 1px;
       }
     }
   }

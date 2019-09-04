@@ -68,14 +68,14 @@ export default {
     }
   },
   watch: {
-    '$route' (to, from) {
+    $route(to, from) {
       // 对路由变化作出响应...
       this.getTable(this.selected);
     }
   },
   mounted() {
     this.getTable(this.selected);
-  },
+  }
   // beforeRouteUpdate(to, from, next) {
   //   this.getTable(this.selected);
   //   next();
@@ -149,11 +149,11 @@ input::-webkit-input-placeholder {
           }
 
           .search-img {
-            position: relative;
-            bottom: 25px;
-            left: 135px;
+            position: absolute;
+            top: 97px;
+            left: 146px;
             height: 15px;
-            cursor: pointer;
+            // cursor: pointer;
           }
         }
       }
