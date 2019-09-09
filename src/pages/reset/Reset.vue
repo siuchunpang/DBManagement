@@ -6,12 +6,12 @@
 				<div class="middle-subtitle">重置密码</div>
 			</div>
 			<div class="form" v-for="(item, i) in arr" :key="i">
-				<div class="el-input">
+				<div class="input">
 					<input
 						:id="item.id"
             :type="item.type"
             :placeholder="item.placeholder"
-            class="el-input-inner"
+            class="input-inner"
             :style="{'border-color': item.borderColor}"
             @blur="handleBlur(item)"
             @focus="handleFocus(item)"
@@ -20,18 +20,18 @@
 					<span class="error" v-show="item.showError">{{ item.errorMsg }}</span>
 				</div>
 			</div>
-			<div class="el-form">
-				<div class="el-form-item">
+			<div class="form">
+				<div class="form-item">
 					<button
-						id="el-register"
-						class="el-button el-input-inner"
+						id="register"
+						class="button input-inner"
 						@click="handleResetClick"
 					>
 					重置密码</button>
 				</div>
 			</div>
-			<div class="el-form">
-				<div class="el-form-login">
+			<div class="form">
+				<div class="form-login">
 					<router-link to="/" class="back_to_login">返回登录</router-link>
 				</div>
 			</div>

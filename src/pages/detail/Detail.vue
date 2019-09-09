@@ -1,29 +1,42 @@
 <template>
   <div class="detail-base">
     <detail-nav></detail-nav>
-    <detail-mainleft :appLists="appLists" @showModal="handleShowModal"></detail-mainleft>
+    <detail-main
+      :appLists="appLists"
+      @showModal="handleShowModal"
+      @showTable="handleShowTable"
+      @tableId="getTableId"
+    ></detail-main>
     <detail-modal v-show="showModal" @showModal="handleShowModal"></detail-modal>
     <div id="hide" :class="{'modal-backdrop': showModal}"></div>
+    <detail-table v-show="showTable"></detail-table>
   </div>
 </template>
 
 <script>
 import DetailNav from "./components/Nav";
-import DetailMainleft from "./components/MainLeft";
+import DetailMain from "./components/Main";
 import DetailModal from "./components/Modal";
+import DetailTable from "./components/Table";
 import axios from "axios";
 import Qs from "qs";
 export default {
   name: "Detail",
   components: {
     DetailNav,
-    DetailMainleft,
-    DetailModal
+    DetailMain,
+    DetailModal,
+    DetailTable
   },
   data() {
     return {
       showModal: false,
-      appLists: []
+      showTable: false,
+      tableId: "",
+      appLists: [],
+      fieldList:[],
+      fieldData: [],
+      fieldNames: []
     };
   },
   methods: {
@@ -41,8 +54,27 @@ export default {
           }
         });
     },
+    getTableId(tableId) {
+      this.tableId = tableId;
+    },
+    getTableData() {
+      let params = { tableId: this.tableId, pageNum: 1, pageSize: 10 };
+      axios.post("/api/field/getFieldData", Qs.stringify(params)).then(res => {
+        res = res.data;
+        if (res.code === 0) {
+          this.fieldList = res.data.fieldData.list;
+          console.log(this.fieldList);
+        } else {
+          this.$layer.msg(res.msg);
+        }
+      });
+    },
     handleShowModal(showModal) {
       this.showModal = showModal;
+    },
+    handleShowTable(showTable) {
+      this.getTableData();
+      this.showTable = showTable;
     }
   },
   mounted() {

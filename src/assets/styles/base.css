@@ -40,11 +40,11 @@
 	margin: 0.625rem;
 }
 
-.el-input, .el-form {
+.input, .form {
 	margin-bottom: 22px;
 }
 
-.el-input-inner {
+.input-inner {
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
@@ -55,23 +55,23 @@
 	padding: 0 10px;
 }
 
-.el-input-inner:focus {
+.input-inner:focus {
 	border-color: rgb(53, 147, 255);
 }
 
-.el-button {
+.button {
 	background-color: rgb(53, 147, 255);
 	cursor: pointer;
 }
 
-.el-form-span {
+.form-span {
 	display: flex;
 	justify-content: space-between;
 	padding: 0 10px;
 	color: #888;
 }
 
-.el-form-login {
+.form-login {
 	display: flex;
 	justify-content: center;
 	padding: 0 10px;

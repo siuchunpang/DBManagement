@@ -1,6 +1,6 @@
 <template>
-  <div class="main-left">
-    <div class="main-left-container">
+  <div class="main">
+    <div class="main-container">
       <div class="choose-app">
         <form>
           <select v-model="selected" class="form-control" @change="changeOption(selected)">
@@ -21,7 +21,13 @@
         </div>
         <div class="sidebar-container">
           <ul class="table">
-            <li class="table-list" v-for="tableItem of tableLists" :key="tableItem.id">
+            <li
+              class="table-list"
+              v-for="tableItem of tableLists"
+              :key="tableItem.id"
+              @click="handleClickTable(tableItem)"
+              :class="{active : active == tableItem.name}"
+            >
               <div class="table-name">{{ tableItem.name }}</div>
             </li>
           </ul>
@@ -35,11 +41,12 @@
 import axios from "axios";
 import Qs from "qs";
 export default {
-  name: "DetailMainleft",
+  name: "DetailMain",
   data() {
     return {
       selected: this.$route.params.id,
       showModal: false,
+      active: "",
       tableLists: []
     };
   },
@@ -65,6 +72,11 @@ export default {
           this.$layer.msg(res.msg);
         }
       });
+    },
+    handleClickTable(tableItem) {
+      this.active = tableItem.name;
+      this.$emit("tableId", tableItem.id);
+      this.$emit("showTable", true);
     }
   },
   watch: {
@@ -89,6 +101,10 @@ input::-webkit-input-placeholder {
   color: #999;
 }
 
+.active {
+   background: #f6f6f6;
+ }
+
 .form-control {
   width: 100%;
   height: 34px;
@@ -100,14 +116,14 @@ input::-webkit-input-placeholder {
   border-radius: 2px;
 }
 
-.main-left {
+.main {
   position: fixed;
   top: 0;
   left: 60px;
   width: 180px;
   height: 100%;
 
-  .main-left-container {
+  .main-container {
     height: 100%;
     border-left: 1px solid #dadada;
     border-right: 1px solid #dadada;

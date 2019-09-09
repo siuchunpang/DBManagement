@@ -6,12 +6,12 @@
         <div class="middle-subtitle">欢迎登录</div>
       </div>
       <div class="form" v-for="(item, i) in arr" :key="i">
-        <div class="el-input">
+        <div class="input">
           <input
             :id="item.id"
             :type="item.type"
             :placeholder="item.placeholder"
-            class="el-input-inner"
+            class="input-inner"
             :style="{'border-color': item.borderColor}"
             @blur="handleBlur(item)"
             @focus="handleFocus(item)"
@@ -20,13 +20,13 @@
           <span class="error" v-show="item.showError">{{ item.errorMsg }}</span>
         </div>
       </div>
-      <div class="el-form">
-        <div class="el-form-item">
-          <button id="el-login" class="el-button el-input-inner" @click="handleLoginClick">登录</button>
+      <div class="form">
+        <div class="form-item">
+          <button id="login" class="button input-inner" @click="handleLoginClick">登录</button>
         </div>
       </div>
-      <div class="el-form el-show">
-        <div class="el-form-span">
+      <div class="form show">
+        <div class="form-span">
           <router-link to="/reset" class="reset">重置密码</router-link>
           <router-link to="/register" class="register">注册账号</router-link>
         </div>
