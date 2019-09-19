@@ -20,8 +20,8 @@
             <el-table-column prop="create_time" label="create_time [date]"></el-table-column>
             <el-table-column prop="update_time" label="update_time [date]"></el-table-column>
             <el-table-column prop="date_time" label="date_time[date]"></el-table-column>
-            <el-table-column prop="address" label="address"></el-table-column>
-            <el-table-column prop="zip" label="zip"></el-table-column>
+            <el-table-column prop="now" label="now"></el-table-column>
+            <el-table-column prop="upload_file" label="upload_file"></el-table-column>
           </el-table>
         </div>
       </div>
@@ -32,98 +32,20 @@
 <script>
 export default {
   name: "DetailTable",
+  props: {
+    fieldList: Array
+  },
   data() {
     return {
-      tableData: [
-        {
-          id: "2016-05-02",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-04",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1517 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-01",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1519 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        },
-        {
-          id: "2016-05-03",
-          create_time: "王小虎",
-          update_time: "上海",
-          date_time: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        }
-      ]
+      tableData: this.fieldList
     };
   },
   methods: {
     handleEdit(row) {
-      console.log(row);
+      // console.log(row);
     },
     handleDelete(row) {
-      console.log(row);
+      // console.log(row);
     }
   }
 };

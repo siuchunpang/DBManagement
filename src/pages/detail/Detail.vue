@@ -9,7 +9,7 @@
     ></detail-main>
     <detail-modal v-show="showModal" @showModal="handleShowModal"></detail-modal>
     <div id="hide" :class="{'modal-backdrop': showModal}"></div>
-    <detail-table v-show="showTable"></detail-table>
+    <detail-table v-show="showTable" :fieldList="fieldList"></detail-table>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
       showTable: false,
       tableId: "",
       appLists: [],
-      fieldList:[],
+      fieldList: [],
       fieldData: [],
       fieldNames: []
     };
@@ -57,8 +57,8 @@ export default {
     getTableId(tableId) {
       this.tableId = tableId;
     },
-    getTableData() {
-      let params = { tableId: this.tableId, pageNum: 1, pageSize: 10 };
+    getTableData(tableId) {
+      let params = { tableId: tableId, pageNum: 1, pageSize: 10 };
       axios.post("/api/field/getFieldData", Qs.stringify(params)).then(res => {
         res = res.data;
         if (res.code === 0) {
@@ -73,7 +73,7 @@ export default {
       this.showModal = showModal;
     },
     handleShowTable(showTable) {
-      this.getTableData();
+      this.getTableData(this.tableId);
       this.showTable = showTable;
     }
   },

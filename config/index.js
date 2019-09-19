@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://crgubr.natappfree.cc', // API服务所在IP及端口号
+        target: 'http://v6xda3.natappfree.cc', // API服务所在IP及端口号
         changeOrigin: true, // 如果设置为true,那么本地会虚拟一个服务器接收你的请求并代你发送该请求，这样就不会有跨域问题（只适合开发环境）
         pathRewrite: {
           '^/api': '/' // 重写路径

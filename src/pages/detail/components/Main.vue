@@ -67,7 +67,7 @@ export default {
         res = res.data;
         if (res.code === 0) {
           this.tableLists = res.data;
-          console.log(res);
+          console.log(this.tableLists);
         } else {
           this.$layer.msg(res.msg);
         }
